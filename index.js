@@ -30,6 +30,8 @@ app.get('/webhook/', function (req, res) {
     threadSettings();
 })
 
+threadSettings();
+
 app.post('/webhook/', function (req, res) {
   console.log('Request:: ');
   console.log(util.inspect(req.body, false, null));
@@ -50,6 +52,7 @@ app.post('/webhook/', function (req, res) {
 })
 
 function threadSettings() {
+  console.log("Fire thread setting request");
   request({
     url: 'https://graph.facebook.com/v2.6/me/thread_settings',
     qs: {access_token:token},
