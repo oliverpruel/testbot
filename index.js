@@ -26,6 +26,8 @@ app.get('/webhook/', function (req, res) {
         res.send(req.query['hub.challenge'])
     }
     res.send('Error, wrong token')
+
+    threadSettings();
 })
 
 app.post('/webhook/', function (req, res) {
@@ -46,6 +48,26 @@ app.post('/webhook/', function (req, res) {
     }
     res.sendStatus(200)
 })
+
+function threadSettings() {
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+        setting_type: "greeting",
+        greeting : {
+          text: "Tere tulemas stuudio24 lehele"
+        }
+    }
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending messages: ', error)
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error)
+      }
+  })
+}
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
