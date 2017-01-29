@@ -28,7 +28,7 @@ app.get('/webhook/', function (req, res) {
     res.send('Error, wrong token')
 })
 
-threadSettings();
+setThreadSettings();
 
 app.post('/webhook/', function (req, res) {
   console.log('Request:: ');
@@ -49,8 +49,9 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
-function threadSettings() {
-  console.log("Fire thread setting request");
+function setThreadSettings() {
+
+  // Set Greeting text
   request({
     url: 'https://graph.facebook.com/v2.6/me/thread_settings',
     qs: {access_token:token},
@@ -60,6 +61,28 @@ function threadSettings() {
         greeting : {
           text: "Tere tulemas stuudio24 lehele"
         }
+    }
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending messages: ', error)
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error)
+      }
+  })
+
+  // Set Get started button
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      setting_type: "call_to_actions",
+      thread_state: "new_thread",
+      call_to_actions:[
+        {
+          payload: "Alusta taotlusega"
+        }
+      ]
     }
   }, function(error, response, body) {
       if (error) {
