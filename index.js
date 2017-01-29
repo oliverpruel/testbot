@@ -26,9 +26,9 @@ app.get('/webhook/', function (req, res) {
         res.send(req.query['hub.challenge'])
     }
     res.send('Error, wrong token')
-
-    threadSettings();
 })
+
+threadSettings();
 
 app.post('/webhook/', function (req, res) {
   console.log('Request:: ');
