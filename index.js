@@ -30,8 +30,6 @@ app.get('/webhook/', function (req, res) {
     threadSettings();
 })
 
-threadSettings();
-
 app.post('/webhook/', function (req, res) {
   console.log('Request:: ');
   console.log(util.inspect(req.body, false, null));
