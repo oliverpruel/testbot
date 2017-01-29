@@ -4,6 +4,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
 const app = express()
+const token = process.env.pageAccessToken
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -15,7 +16,7 @@ app.use(bodyParser.json())
 
 // Index route
 app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot ' + process.env.token)
+    res.send('Hello world, I am a chat bot')
 })
 
 // for Facebook verification
@@ -39,7 +40,6 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
-const token = process.env.pageAccessToken;
 
 // Spin up the server
 app.listen(app.get('port'), function() {
