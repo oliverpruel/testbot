@@ -70,6 +70,8 @@ function setThreadSettings() {
       }
   })
 
+  
+
   // Set Get started button
   request({
     url: 'https://graph.facebook.com/v2.6/me/thread_settings',
