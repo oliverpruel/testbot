@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 
 // Index route
 app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
+    res.send('Hello world, I am a chat bot in develop')
 })
 
 // for Facebook verification
@@ -70,7 +70,7 @@ function setThreadSettings() {
       }
   })
 
-  
+
 
   // Set Get started button
   request({
